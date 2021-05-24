@@ -16,24 +16,6 @@ public class ArrayDeque<T> {
      * If no such item exists, returns null. Must not alter the deque!
       */
     public T get(int x) {
-        int first = 0;
-        int last = 0;
-        if (nextFirst == items.length - 1) {
-            first = 0;
-        } else {
-            first = nextFirst + 1;
-        }
-        if (nextLast == 0) {
-            last = items.length - 1;
-        } else {
-            last = nextLast - 1;
-        }
-        if (((x < Math.max(0,first) || x > Math.min(last,items.length - 1)) && first < last)
-                || (first>last && ((x>last && x<first) || x>items.length - 1 || x < 0) && size != items.length - 1)
-                || (first>last && (x>items.length - 1 || x < 0) && size == items.length - 1)
-                || (first == last && x != first)) {
-            return null;
-        }
         return items[x];
     }
 
