@@ -107,8 +107,8 @@ public class LinkedListDeque<T> {
         if (size == 0 || size<index) {
             return null;
         }
-        IntNode IndexNode = sentinel;
-        T item = null;
+        IntNode IndexNode = sentinel.next;
+        T item = IndexNode.item;
         int i = 0;
         while (i<index) {
             IndexNode = IndexNode.next;
@@ -122,7 +122,7 @@ public class LinkedListDeque<T> {
      * Removes first item in the list and returns the rest of the list. If no such item exists, returns null.
      */
     private T getRecursiveHelp(int index, IntNode in) {
-        if (index == 1) {
+        if (index == 0) {
             return in.next.item;
         }
         in = in.next;
@@ -138,6 +138,16 @@ public class LinkedListDeque<T> {
         }
         IntNode pointer = sentinel;
         return getRecursiveHelp(index, pointer);
+    }
+
+    public static void main (String []args){
+        LinkedListDeque t = new LinkedListDeque<Integer>();
+        t.addFirst(3);
+        t.addFirst(2);
+        t.get(1);
+
+
+
     }
 
 
