@@ -139,17 +139,5 @@ public class LinkedListDeque<T> {
         IntNode pointer = sentinel;
         return getRecursiveHelp(index, pointer);
     }
-
-    public static void main (String []args){
-        LinkedListDeque t = new LinkedListDeque<Integer>();
-        t.addFirst(3);
-        t.addFirst(2);
-        t.get(1);
-
-
-
-    }
-
-
 }
 
