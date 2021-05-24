@@ -28,7 +28,10 @@ public class ArrayDeque<T> {
         } else {
             last = nextLast - 1;
         }
-        if (((x<Math.max(0,first) || x>Math.min(last,items.length - 1)) && first < last) || (first>last && (x>last && x<first) || x>items.length - 1)) {
+        if (((x < Math.max(0,first) || x > Math.min(last,items.length - 1)) && first < last)
+                || (first>last && ((x>last && x<first) || x>items.length - 1 || x < 0))
+                || (first>last && (x>items.length - 1 || x < 0) && size == items.length - 1)
+                || (first == last && x != first)) {
             return null;
         }
         return items[x];
@@ -157,6 +160,7 @@ public class ArrayDeque<T> {
         size = size - 1;
         T firstItem = items[nextFirst];
         items[nextFirst] = null;
+        System.out.println(firstItem);
         return firstItem;
     }
 
@@ -178,6 +182,7 @@ public class ArrayDeque<T> {
         items[nextLast] = null;
         return lastItem;
     }
+
 
 
 }
