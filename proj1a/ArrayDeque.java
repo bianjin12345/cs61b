@@ -15,27 +15,27 @@ public class ArrayDeque<Item> {
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      * If no such item exists, returns null. Must not alter the deque!
       */
-    public Item get(int x){
+    public Item get(int x) {
         int first = 0;
         int last = 0;
-        if (nextFirst == items.length - 1){
+        if (nextFirst == items.length - 1) {
             first = 0;
-        } else{
+        } else {
             first = nextFirst + 1;
         }
-        if (nextLast == 0){
+        if (nextLast == 0) {
             last = items.length - 1;
-        } else{
+        } else {
             last = nextLast - 1;
         }
-        if (((x<Math.max(0,first) || x>Math.min(last,items.length - 1)) && first < last) || (first>last && (x>last && x<first) || x>items.length - 1)){
+        if (((x<Math.max(0,first) || x>Math.min(last,items.length - 1)) && first < last) || (first>last && (x>last && x<first) || x>items.length - 1)) {
             return null;
         }
         return items[x];
     }
 
     /** Resizes the underlying array to the target capacity. */
-    private void resizeIncrease(){
+    private void resizeIncrease() {
         Item[] a = (Item[]) new Object[size * 2];
         System.arraycopy(items,0,a,0,size);
         items = a;
@@ -44,7 +44,7 @@ public class ArrayDeque<Item> {
     }
 
     /** Resizes the underlying array to the target capacity. */
-    private void resizeDecrease(){
+    private void resizeDecrease() {
         Item[] a;
         if (items.length % 2 == 0) {
             a = (Item[]) new Object[items.length / 2];
@@ -52,16 +52,16 @@ public class ArrayDeque<Item> {
             a = (Item[]) new Object[items.length / 2 + 1];
         }
         Item[] b = items;
-        if (nextFirst == items.length-1){
+        if (nextFirst == items.length-1) {
             nextFirst = 0;
         }else{
             nextFirst = nextFirst + 1;
         }
-        for (int i = 0; i<size; i++){
+        for (int i = 0; i<size; i++) {
             b[i] = items[nextFirst];
-            if (nextFirst == items.length-1){
+            if (nextFirst == items.length-1) {
                 nextFirst = 0;
-            }else{
+            }else {
                 nextFirst = nextFirst + 1;
             }
         }
@@ -72,8 +72,8 @@ public class ArrayDeque<Item> {
     }
 
     /** Adds an item of type T to the front of the deque. */
-    public void addFirst(Item k){
-        if (size == items.length){
+    public void addFirst(Item k) {
+        if (size == items.length) {
             resizeIncrease();
         }
         items[nextFirst] = k;
@@ -82,8 +82,8 @@ public class ArrayDeque<Item> {
     }
 
     /** Adds an item of type T to the back of the deque. */
-    public void addLast(Item k){
-        if (size == items.length){
+    public void addLast(Item k) {
+        if (size == items.length) {
             resizeIncrease();
         }
         items[nextLast] = k;
@@ -92,7 +92,7 @@ public class ArrayDeque<Item> {
     }
 
     /** Returns true if deque is empty, false otherwise. */
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         if (size == 0){
             return true;
         }
@@ -100,12 +100,12 @@ public class ArrayDeque<Item> {
     }
 
     /** Returns the number of items in the deque. */
-    public int size(){
+    public int size() {
         return size;
     }
 
     /** move in counter clockwise direction */
-    public void moveCounterClockwise(){
+    public void moveCounterClockwise() {
         if (nextFirst == 0){
             nextFirst = items.length - 1;
         }
@@ -115,7 +115,7 @@ public class ArrayDeque<Item> {
     }
 
     /** move in clockwise direction */
-    public void moveClockwise(){
+    public void moveClockwise() {
         if (nextLast == items.length - 1){
             nextLast = 0;
         }
@@ -125,14 +125,14 @@ public class ArrayDeque<Item> {
     /**  Prints the items in the deque from first to last, separated by a space. */
     public void printDeque() {
         int next = nextFirst;
-        if (next == items.length-1){
+        if (next == items.length-1) {
             next = 0;
-        }else{
+        }else {
             next = next + 1;
         }
-        for (int i=0; i<size; i++){
+        for (int i=0; i<size; i++) {
             System.out.print(items[next]+" ");
-            if (next == items.length-1){
+            if (next == items.length-1) {
                 next = 0;
             }else{
                 next = next + 1;
@@ -142,14 +142,14 @@ public class ArrayDeque<Item> {
     }
 
     /** Removes and returns the item at the front of the deque. If no such item exists, returns null. */
-    public Item removeFirst(){
+    public Item removeFirst() {
         if (size == 0){
             return null;
         }
         if ((size - 1)<items.length * 0.25 && items.length > 16) {
             resizeDecrease();
         }
-        if (nextFirst == items.length - 1){
+        if (nextFirst == items.length - 1) {
             nextFirst = 0;
         } else {
             nextFirst = nextFirst + 1;
@@ -161,14 +161,14 @@ public class ArrayDeque<Item> {
     }
 
     /** Removes and returns the item at the back of the deque. If no such item exists, returns null. */
-    public Item removeLast(){
+    public Item removeLast() {
         if (size == 0){
             return null;
         }
-        if (items.length > 16 && (size - 1)<items.length * 0.25){
+        if (items.length > 16 && (size - 1)<items.length * 0.25) {
             resizeDecrease();
         }
-        if (nextLast == 0){
+        if (nextLast == 0) {
             nextLast = items.length - 1;
         } else {
             nextLast = nextLast - 1;
@@ -179,7 +179,7 @@ public class ArrayDeque<Item> {
         return lastItem;
     }
 
-     public static void main (String []args){
+     public static void main (String []args) {
         ArrayDeque t = new ArrayDeque<Integer>();
         t.addFirst(3);
         t.get(8);

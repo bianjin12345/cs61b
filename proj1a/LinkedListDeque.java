@@ -110,14 +110,14 @@ public class LinkedListDeque<ITEM> {
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      *   If no such item exists, returns null. Must not alter the deque!
      */
-    public ITEM get(int index){
-        if (size == 0 || size<index){
+    public ITEM get(int index) {
+        if (size == 0 || size<index) {
             return null;
         }
         IntNode IndexNode = sentinel;
         ITEM item = null;
         int i = 0;
-        while (i<index){
+        while (i<index) {
             IndexNode = IndexNode.next;
             item = IndexNode.item;
             i += 1;
@@ -147,7 +147,7 @@ public class LinkedListDeque<ITEM> {
         return getRecursiveHelp(index, pointer);
     }
 
-    public static void main (String[] args){
+    public static void main (String[] args) {
         LinkedListDeque<Integer> t = new LinkedListDeque<>();
         LinkedListDeque q = new LinkedListDeque(2);
         q.addFirst(3);
