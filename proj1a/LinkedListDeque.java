@@ -20,6 +20,8 @@ public class LinkedListDeque<T> {
      */
     public LinkedListDeque() {
         sentinel = new IntNode(null, null, null);
+        sentinel.prev = sentinel;
+        sentinel.next = sentinel;
         size = 0;
     }
 
@@ -55,7 +57,7 @@ public class LinkedListDeque<T> {
      * Returns true if deque is empty, false otherwise.
      */
     public boolean isEmpty() {
-        if (sentinel.next == null) {
+        if (size == 0) {
             return true;
         }
         return false;
