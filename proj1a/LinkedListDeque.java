@@ -1,10 +1,10 @@
-public class LinkedListDeque<ITEM> {
+public class LinkedListDeque<T> {
     private class IntNode {
         public IntNode prev;
-        public ITEM item;
+        public T item;
         public IntNode next;
 
-        public IntNode(IntNode n, ITEM i, IntNode m) {
+        public IntNode(IntNode n, T i, IntNode m) {
             prev = n;
             item= i;
             next = m;
@@ -26,7 +26,7 @@ public class LinkedListDeque<ITEM> {
     /**
      * Creates an linkedListDeque with int x
      */
-    public LinkedListDeque(ITEM x) {
+    public LinkedListDeque(T x) {
         sentinel = new IntNode(null, null, null);
         sentinel.next = new IntNode(sentinel, x, sentinel);
         sentinel.prev = sentinel.next;
@@ -36,7 +36,7 @@ public class LinkedListDeque<ITEM> {
     /**
      * Adds an item of type T to the front of the deque.
      */
-    public void addFirst(ITEM x) {
+    public void addFirst(T x) {
         sentinel.next = new IntNode(sentinel, x, sentinel.next);
         sentinel.next.next.prev = sentinel.next;
         size = size + 1;
@@ -45,7 +45,7 @@ public class LinkedListDeque<ITEM> {
     /**
      * Adds an item of type T to the back of the deque.
      */
-    public void addLast(ITEM x) {
+    public void addLast(T x) {
         sentinel.prev = new IntNode(sentinel.prev, x, sentinel);
         sentinel.prev.prev.next = sentinel.prev;
         size = size + 1;
@@ -83,11 +83,11 @@ public class LinkedListDeque<ITEM> {
     /**
      * Removes and returns the item at the front of the deque. If no such item exists, returns null.
      */
-    public ITEM removeFirst() {
+    public T removeFirst() {
         if (size == 0) {
             return null;
         }
-        ITEM First = sentinel.next.item;
+        T First = sentinel.next.item;
         sentinel.next = sentinel.next.next;
         sentinel.next.prev = sentinel;
         size -= 1;
@@ -97,11 +97,11 @@ public class LinkedListDeque<ITEM> {
     /**
      * Removes and returns the item at the back of the deque. If no such item exists, returns null.
      */
-    public ITEM removeLast() {
+    public T removeLast() {
         if (size == 0) {
             return null;
         }
-        ITEM Last = sentinel.prev.item;
+        T Last = sentinel.prev.item;
         sentinel.prev = sentinel.prev.prev;
         size -= 1;
         return Last;
@@ -110,12 +110,12 @@ public class LinkedListDeque<ITEM> {
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      *   If no such item exists, returns null. Must not alter the deque!
      */
-    public ITEM get(int index) {
+    public T get(int index) {
         if (size == 0 || size<index) {
             return null;
         }
         IntNode IndexNode = sentinel;
-        ITEM item = null;
+        T item = null;
         int i = 0;
         while (i<index) {
             IndexNode = IndexNode.next;
@@ -128,7 +128,7 @@ public class LinkedListDeque<ITEM> {
     /**
      * Removes first item in the list and returns the rest of the list. If no such item exists, returns null.
      */
-    public ITEM getRecursiveHelp(int index, IntNode in) {
+    public T getRecursiveHelp(int index, IntNode in) {
         if (index == 1) {
             return in.next.item;
         }
@@ -139,7 +139,7 @@ public class LinkedListDeque<ITEM> {
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      *   If no such item exists, returns null. Must not alter the deque!
     */
-    public ITEM getRecursive(int index) {
+    public T getRecursive(int index) {
         if (size == 0 || size < index) {
             return null;
         }
