@@ -26,16 +26,6 @@ public class LinkedListDeque<T> {
     }
 
     /**
-     * Creates an linkedListDeque with int x
-     */
-    public LinkedListDeque(T x) {
-        sentinel = new IntNode(null, null, null);
-        sentinel.next = new IntNode(sentinel, x, sentinel);
-        sentinel.prev = sentinel.next;
-        size = 1;
-    }
-
-    /**
      * Adds an item of type T to the front of the deque.
      */
     public void addFirst(T x) {
@@ -130,7 +120,7 @@ public class LinkedListDeque<T> {
     /**
      * Removes first item in the list and returns the rest of the list. If no such item exists, returns null.
      */
-    public T getRecursiveHelp(int index, IntNode in) {
+    private T getRecursiveHelp(int index, IntNode in) {
         if (index == 1) {
             return in.next.item;
         }
@@ -149,17 +139,6 @@ public class LinkedListDeque<T> {
         return getRecursiveHelp(index, pointer);
     }
 
-    public static void main (String[] args) {
-        LinkedListDeque<Integer> t = new LinkedListDeque<>();
-        LinkedListDeque q = new LinkedListDeque(2);
-        q.addFirst(3);
-        q.addLast(4);
-        System.out.println(t.isEmpty());
-        System.out.println(q.size());
-        q.printDeque();
-        q.removeFirst();
-        System.out.println(q.get(2));
-        System.out.println(q.getRecursive(2));
-    }
+
 }
 

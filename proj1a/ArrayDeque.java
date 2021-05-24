@@ -105,7 +105,7 @@ public class ArrayDeque<T> {
     }
 
     /** move in counter clockwise direction */
-    public void moveCounterClockwise() {
+    private void moveCounterClockwise() {
         if (nextFirst == 0){
             nextFirst = items.length - 1;
         }
@@ -115,7 +115,7 @@ public class ArrayDeque<T> {
     }
 
     /** move in clockwise direction */
-    public void moveClockwise() {
+    private void moveClockwise() {
         if (nextLast == items.length - 1){
             nextLast = 0;
         }
@@ -179,31 +179,6 @@ public class ArrayDeque<T> {
         return lastItem;
     }
 
-     public static void main (String []args) {
-        ArrayDeque t = new ArrayDeque<Integer>();
-        t.addFirst(3);
-        t.get(8);
-        t.addFirst(4);
-        t.addLast(6);
-        t.addFirst(0);
-        t.addLast(20);
-        t.addFirst(22);
-        t.addLast(21);
-        t.addLast(2);
-        t.addFirst(78);
-        t.addLast(22);
-        t.addLast(23);
-        t.isEmpty();
-        t.size();
-        t.printDeque();
-        t.removeFirst();
-        t.removeLast();
-        t.removeFirst();
-        t.removeFirst();
-        t.removeFirst();
-        t.removeFirst();
-        t.removeFirst();
-        t.removeLast();
-    }
+
 }
 
