@@ -140,9 +140,7 @@ public class ArrayDeque<T> {
         if (size == 0){
             return null;
         }
-        if (size <items.length * 0.25 && items.length >= 16) {
-            resizeDecrease();
-        }
+
         if (nextFirst == items.length - 1) {
             nextFirst = 0;
         } else {
@@ -151,7 +149,9 @@ public class ArrayDeque<T> {
         size = size - 1;
         T firstItem = items[nextFirst];
         items[nextFirst] = null;
-        System.out.println(firstItem);
+        if (size <items.length * 0.25 && items.length >= 16) {
+            resizeDecrease();
+        }
         return firstItem;
     }
 
@@ -160,9 +160,7 @@ public class ArrayDeque<T> {
         if (size == 0){
             return null;
         }
-        if (items.length >= 16 && size <items.length * 0.25) {
-            resizeDecrease();
-        }
+
         if (nextLast == 0) {
             nextLast = items.length - 1;
         } else {
@@ -171,6 +169,9 @@ public class ArrayDeque<T> {
         size = size - 1;
         T lastItem = items[nextLast];
         items[nextLast] = null;
+        if (items.length >= 16 && size <items.length * 0.25) {
+            resizeDecrease();
+        }
         return lastItem;
     }
 
