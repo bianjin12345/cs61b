@@ -12,6 +12,14 @@ public class ArrayDeque<T> {
         nextLast = 1;
     }
 
+    private int addOne(int a) {
+        return (a + 1) % items.length;
+    }
+
+    private int subOne(int a) {
+        return (a - 1 + items.length) % items.length;
+    }
+
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      * If no such item exists, returns null. Must not alter the deque!
       */
@@ -30,8 +38,8 @@ public class ArrayDeque<T> {
     }
 
     /** Resizes the underlying array to the target capacity. */
-    private void resize(int RFactor) {
-        T[] a = (T[]) new Object[RFactor];
+    private void resize(int length) {
+        T[] a = (T[]) new Object[length];
         int start = 0;
         if (nextFirst == items.length-1) {
             start = 0;
@@ -126,19 +134,14 @@ public class ArrayDeque<T> {
         if (size == 0){
             return null;
         }
-
-        if (nextFirst == items.length - 1) {
-            nextFirst = 0;
-        } else {
-            nextFirst = nextFirst + 1;
+        T a = items[addOne(nextFirst)];
+        items[addOne(nextFirst)] = null;
+        nextFirst = addOne(nextFirst);
+        size -= 1;
+        if (items.length >= 16 && size < (items.length / 4)) {
+            resize(items.length / 2);
         }
-        size = size - 1;
-        T firstItem = items[nextFirst];
-        items[nextFirst] = null;
-        if (size <items.length * 0.25 && items.length >= 16) {
-            resize(items.length/2);
-        }
-        return firstItem;
+        return a;
     }
 
     /** Removes and returns the item at the back of the deque. If no such item exists, returns null. */
@@ -147,21 +150,17 @@ public class ArrayDeque<T> {
             return null;
         }
 
-        if (nextLast == 0) {
-            nextLast = items.length - 1;
-        } else {
-            nextLast = nextLast - 1;
+        T a = items[subOne(nextLast)];
+        items[subOne(nextLast)] = null;
+        nextLast = subOne(nextLast);
+        size -= 1;
+        if (items.length >= 16 && size < (items.length / 4)) {
+            resize(items.length / 2);
         }
-        size = size - 1;
-        T lastItem = items[nextLast];
-        items[nextLast] = null;
-        if (items.length >= 16 && size <items.length * 0.25) {
-            resize(items.length/2);
-        }
-        return lastItem;
+        return a;
     }
 
-    }
+}
 
 
 
