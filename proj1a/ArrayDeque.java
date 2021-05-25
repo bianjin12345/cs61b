@@ -140,7 +140,7 @@ public class ArrayDeque<T> {
         if (size == 0){
             return null;
         }
-        if ((size - 1)<items.length * 0.25 && items.length > 16) {
+        if (size <items.length * 0.25 && items.length >= 16) {
             resizeDecrease();
         }
         if (nextFirst == items.length - 1) {
@@ -160,7 +160,7 @@ public class ArrayDeque<T> {
         if (size == 0){
             return null;
         }
-        if (items.length > 16 && (size - 1)<items.length * 0.25) {
+        if (items.length >= 16 && size <items.length * 0.25) {
             resizeDecrease();
         }
         if (nextLast == 0) {
