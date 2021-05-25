@@ -20,10 +20,10 @@ public class ArrayDeque<T> {
             return null;
         }
         int start = 0;
-        if (start == items.length-1) {
+        if (nextFirst == items.length-1) {
             start = 0;
         }else {
-            start = start + 1;
+            start = nextFirst + 1;
         }
             return items[(start + x) % items.length];
     }
