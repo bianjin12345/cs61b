@@ -25,13 +25,27 @@ public class ArrayDeque<T> {
         }else {
             start = nextFirst + 1;
         }
-            return items[(start + x) % items.length];
+        System.out.println(items[(start + x) % items.length]);
+        return items[(start + x) % items.length];
     }
 
     /** Resizes the underlying array to the target capacity. */
     private void resizeIncrease() {
         T[] a = (T[]) new Object[size * 2];
-        System.arraycopy(items,0,a,0,size);
+        int start = 0;
+        if (nextFirst == items.length-1) {
+            start = 0;
+        }else {
+            start = nextFirst + 1;
+        }
+        for (int i = 0; i < size; i++){
+            a[i] = items[start];
+            if (start == items.length-1) {
+                start = 0;
+            }else {
+                start = start + 1;
+            }
+        }
         items = a;
         nextFirst = a.length - 1;
         nextLast = size;
@@ -39,12 +53,7 @@ public class ArrayDeque<T> {
 
     /** Resizes the underlying array to the target capacity. */
     private void resizeDecrease() {
-        T[] a;
-        if (items.length % 2 == 0) {
-            a = (T[]) new Object[items.length / 2];
-        } else{
-            a = (T[]) new Object[items.length / 2 + 1];
-        }
+        T[] a = (T[]) new Object[items.length / 2];
         T[] b = items;
         if (nextFirst == items.length-1) {
             nextFirst = 0;
@@ -177,5 +186,8 @@ public class ArrayDeque<T> {
 
 
 
-}
+    }
+
+
+
 
