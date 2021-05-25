@@ -8,15 +8,23 @@ public class ArrayDeque<T> {
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
-        nextFirst = 7;
-        nextLast = 0;
+        nextFirst = 0;
+        nextLast = -1;
     }
 
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      * If no such item exists, returns null. Must not alter the deque!
       */
-    public T get(int x) {
-        return items[x];
+    public T get(int index) {
+        if (index >= size) {
+            return null;
+        }
+        int start = 0;
+        if (start == items.length-1) {
+            start = 0;
+        }else{
+            start = start + 1;
+        return items[(start + index) % items.length];
     }
 
     /** Resizes the underlying array to the target capacity. */
@@ -62,7 +70,7 @@ public class ArrayDeque<T> {
             resizeIncrease();
         }
         items[nextFirst] = k;
-        size = size + 1;
+        size += 1;
         moveCounterClockwise();
     }
 
@@ -72,16 +80,13 @@ public class ArrayDeque<T> {
             resizeIncrease();
         }
         items[nextLast] = k;
-        size = size + 1;
+        size += 1;
         moveClockwise();
     }
 
     /** Returns true if deque is empty, false otherwise. */
     public boolean isEmpty() {
-        if (size == 0){
-            return true;
-        }
-        return false;
+        return size == 0;
     }
 
     /** Returns the number of items in the deque. */
@@ -131,7 +136,7 @@ public class ArrayDeque<T> {
         if (size == 0){
             return null;
         }
-        if ((size - 1)<items.length * 0.25 && items.length > 16) {
+        if (size<items.length * 0.25 && items.length >= 16) {
             resizeDecrease();
         }
         if (nextFirst == items.length - 1) {
@@ -139,7 +144,7 @@ public class ArrayDeque<T> {
         } else {
             nextFirst = nextFirst + 1;
         }
-        size = size - 1;
+        size -= 1;
         T firstItem = items[nextFirst];
         items[nextFirst] = null;
         System.out.println(firstItem);
@@ -151,7 +156,7 @@ public class ArrayDeque<T> {
         if (size == 0){
             return null;
         }
-        if (items.length > 16 && (size - 1)<items.length * 0.25) {
+        if (items.length >= 16 && size <items.length * 0.25) {
             resizeDecrease();
         }
         if (nextLast == 0) {
